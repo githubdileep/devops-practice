@@ -118,13 +118,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Column 2: Quick Links */}
+        {/* Column 2: Quick Links (UPDATED) */}
         <div>
           <h4 className="text-white font-bold mb-6">Company</h4>
           <ul className="space-y-4 text-sm text-gray-500">
             <li><Link href="/about" className="hover:text-cyan-400 transition-colors">About Us</Link></li>
             <li><Link href="/work" className="hover:text-cyan-400 transition-colors">Our Work</Link></li>
             <li><Link href="/services" className="hover:text-cyan-400 transition-colors">What We Do</Link></li>
+            <li><Link href="/careers" className="hover:text-cyan-400 transition-colors">Careers</Link></li>
             <li><Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link></li>
           </ul>
         </div>
@@ -134,12 +135,12 @@ export default function Footer() {
           <h4 className="text-white font-bold mb-6">Services</h4>
           <ul className="space-y-4 text-sm text-gray-500">
             <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Web Design & Development</Link></li>
-            <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Cloud & DevOps</Link></li>
             <li><Link href="/services" className="hover:text-cyan-400 transition-colors">App Development</Link></li>
-            <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Fully Managed Hosting</Link></li>
+            <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Web Hosting</Link></li>
             <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Branding & Identity</Link></li>
+            <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Domain & Business Mail</Link></li>
             <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Digital Marketing</Link></li>
-            <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Business Security & Mail</Link></li>
+            <li><Link href="/services" className="hover:text-cyan-400 transition-colors">Cloud & DevOps</Link></li>
           </ul>
         </div>
 
@@ -182,7 +183,6 @@ export default function Footer() {
       {/* 3. BOTTOM COPYRIGHT BAR */}
       <div className="max-w-7xl mx-auto px-6 py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
         
-        {/* REMOVED "Inc" here */}
         <div className="text-xs text-gray-500">
           &copy; {new Date().getFullYear()} Pixalara. All rights reserved.
         </div>

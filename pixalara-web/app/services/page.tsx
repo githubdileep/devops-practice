@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { 
   FaPaintBrush, FaLayerGroup, FaMobileAlt, FaEnvelope, 
   FaServer, FaBullhorn, FaCloud, FaArrowRight,
@@ -8,7 +9,7 @@ import {
 } from 'react-icons/fa';
 import { SiCloudflare, SiZoho } from 'react-icons/si';
 
-// === SERVICE DATA ===
+// === SERVICE DATA (REORDERED) ===
 const services = [
   {
     id: "01",
@@ -20,14 +21,6 @@ const services = [
   },
   {
     id: "02",
-    title: "Cloud & DevOps",
-    icon: <FaCloud />,
-    color: "from-cyan-500 to-blue-500",
-    description: "Stability is a luxury we make standard. We architect cloud-native infrastructure on AWS and Google Cloud that autoscales with your traffic. From CI/CD pipelines to Docker containerization, we ensure your system never sleeps.",
-    features: ["Cloud-Native Architecture", "Automated CI/CD Pipelines", "Docker & Kubernetes", "Zero-Downtime Deployment"]
-  },
-  {
-    id: "03",
     title: "App Development",
     icon: <FaMobileAlt />,
     color: "from-red-600 to-orange-500",
@@ -35,7 +28,7 @@ const services = [
     features: ["Cross-Platform Engineering", "React Native & Flutter", "Secure API Integration", "App Store Deployment"]
   },
   {
-    id: "04",
+    id: "03",
     title: "Fully Managed Hosting",
     icon: <FaServer />,
     color: "from-indigo-600 to-blue-500",
@@ -43,12 +36,20 @@ const services = [
     features: ["NVMe High-Speed Servers", "Real-Time Threat Security", "Daily Automated Backups", "24/7 Uptime Monitoring"]
   },
   {
-    id: "05",
+    id: "04",
     title: "Branding & Identity",
     icon: <FaLayerGroup />,
     color: "from-purple-600 to-pink-500",
     description: "A brand is more than a logo—it's the visual language of your business. We craft cohesive identities that resonate with modern audiences, ensuring consistency across every digital touchpoint.",
     features: ["Visual Identity Systems", "Brand Guidelines", "Modern UI/UX Design", "Corporate Strategy"]
+  },
+  {
+    id: "05",
+    title: "Business Security & Mail",
+    icon: <FaEnvelope />,
+    color: "from-emerald-500 to-teal-400",
+    description: "Secure communications are the backbone of any enterprise. We set up professional Google Workspace or Microsoft 365 suites with advanced DNS configurations (DMARC/DKIM) to ensure your emails always hit the inbox.",
+    features: ["Enterprise Mail Setup", "DMARC/DKIM Security", "Spam Protection", "Domain Management"]
   },
   {
     id: "06",
@@ -60,11 +61,11 @@ const services = [
   },
   {
     id: "07",
-    title: "Business Security & Mail",
-    icon: <FaEnvelope />,
-    color: "from-emerald-500 to-teal-400",
-    description: "Secure communications are the backbone of any enterprise. We set up professional Google Workspace or Microsoft 365 suites with advanced DNS configurations (DMARC/DKIM) to ensure your emails always hit the inbox.",
-    features: ["Enterprise Mail Setup", "DMARC/DKIM Security", "Spam Protection", "Domain Management"]
+    title: "Cloud & DevOps",
+    icon: <FaCloud />,
+    color: "from-cyan-500 to-blue-500",
+    description: "Stability is a luxury we make standard. We architect cloud-native infrastructure on AWS and Google Cloud that autoscales with your traffic. From CI/CD pipelines to Docker containerization, we ensure your system never sleeps.",
+    features: ["Cloud-Native Architecture", "Automated CI/CD Pipelines", "Docker & Kubernetes", "Zero-Downtime Deployment"]
   }
 ];
 
@@ -154,9 +155,13 @@ export default function ServicesPage() {
                         </div>
                       ))}
                     </div>
-                    <button className="px-8 py-3 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-cyan-500/50 transition-all flex items-center gap-3 font-bold text-sm uppercase tracking-widest backdrop-blur-md">
+                    {/* BUTTON UPDATED TO LINK */}
+                    <Link 
+                      href="/contact"
+                      className="px-8 py-3 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-cyan-500/50 transition-all inline-flex items-center gap-3 font-bold text-sm uppercase tracking-widest backdrop-blur-md"
+                    >
                       Start Project <FaArrowRight className="text-cyan-400" />
-                    </button>
+                    </Link>
                   </motion.div>
                 </div>
 

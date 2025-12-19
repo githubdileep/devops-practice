@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { 
-  FaSearch, FaLightbulb, FaPenNib, FaPaintBrush, FaCode, FaRocket 
+  FaSearch, FaLightbulb, FaPenNib, FaPaintBrush, FaCode, FaRocket, FaShieldAlt 
 } from 'react-icons/fa';
 
 const steps = [
@@ -41,6 +41,12 @@ const steps = [
     title: "Optimization",
     desc: "Rigorous testing, SEO tuning, and performance checks before the big launch.",
     icon: <FaRocket />,
+  },
+  {
+    id: 7,
+    title: "Scaling",
+    desc: "We secure, monitor, and scale your platform to handle real-world traffic, growth spikes, and long-term reliability.",
+    icon: <FaShieldAlt />,
   }
 ];
 
@@ -54,7 +60,6 @@ export default function Process() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    // Updated: Changed bg-black to bg-transparent
     <section ref={containerRef} className="bg-transparent py-40 px-6 relative overflow-hidden">
       
       {/* Background Line Track */}
@@ -67,7 +72,7 @@ export default function Process() {
           whileInView={{ opacity: 1, y: 0 }}
           className="text-5xl md:text-8xl font-bold text-white mb-8 tracking-tight"
         >
-          Our 6-Step <span className="text-red-600">Process.</span>
+          Our 7-Step <span className="text-red-600">Process.</span>
         </motion.h2>
         <p className="text-gray-400 max-w-2xl mx-auto text-xl">
           A proven roadmap to turn your vision into a digital reality.

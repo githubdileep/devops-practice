@@ -4,13 +4,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaVolumeMute, FaVolumeUp, FaArrowRight } from 'react-icons/fa';
 import Link from 'next/link';
 
-// === ROTATING TEXT OPTIONS ===
+// === ROTATING TEXT OPTIONS (UPDATED) ===
 const rollingTexts = [
-  "Pixalara transforms businesses with cutting-edge web design.",
-  "Crafting immersive brand identities that stick.",
-  "Building scalable cloud systems for the future.",
-  "Designing award-winning, motion-first interfaces.",
-  "Accelerating your digital growth with robust code."
+  "We engineer high-performance digital experiences that scale.",
+  "Designing and building websites that convert and grow businesses.",
+  "Crafting bold brand identities that earn trust and recognition.",
+  "Developing scalable apps and cloud systems for long-term success.",
+  "Powering growth with clean code, speed, and reliability.",
+  "Turning ideas into production-ready digital platforms.",
+  "Helping ambitious brands launch, scale, and lead online."
 ];
 
 export default function Hero() {
@@ -129,7 +131,7 @@ export default function Hero() {
               </span>
             </motion.h1>
 
-            {/* === ROLLING TEXT EFFECT (REPLACES STATIC PARAGRAPH) === */}
+            {/* === ROLLING TEXT EFFECT === */}
             <div className="h-20 md:h-24 overflow-hidden relative mb-8 flex items-center justify-center">
               <AnimatePresence mode="wait">
                 <motion.p 

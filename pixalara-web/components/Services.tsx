@@ -5,52 +5,53 @@ import {
   FaPaintBrush, FaLayerGroup, FaMobileAlt, FaEnvelope, 
   FaServer, FaBullhorn, FaCloud, FaArrowRight 
 } from 'react-icons/fa';
+import Link from 'next/link';
 
-// === DATA ===
+// === DATA (UPDATED DESCRIPTIONS) ===
 const services = [
   {
     title: "Web Design & Development",
-    desc: "We don't just build websites; we engineer digital gravity. Experience pixel-perfect design fused with robust code that converts visitors into obsessives.",
+    desc: "High-performance websites engineered for speed, scalability, SEO, and conversions — built to grow with your business, not just look good. From landing pages to complex platforms, we focus on clean code, fast load times, and seamless user experiences that drive real results.",
     icon: <FaPaintBrush />,
     color: "from-blue-600 to-cyan-400",
     bgPattern: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
     span: "md:col-span-2", 
   },
   {
-    title: "Branding & Identity",
-    desc: "Your brand is your battlefield. We forge distinct visual identities that cut through the noise.",
-    icon: <FaLayerGroup />,
-    color: "from-purple-600 to-pink-500",
-    bgPattern: "linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent)",
-    span: "md:col-span-1", 
-  },
-  {
     title: "App Development",
-    desc: "Native iOS & Android ecosystems built for speed. High-performance apps users refuse to delete.",
+    desc: "Robust, scalable web and mobile apps built to deliver seamless user experiences and long-term growth.",
     icon: <FaMobileAlt />,
     color: "from-red-600 to-orange-500",
     bgPattern: "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)",
     span: "md:col-span-1",
   },
   {
-    title: "Domain & Business Mail",
-    desc: "Legitimize your presence. Secure enterprise-grade domains and professional Google/Outlook workspaces.",
-    icon: <FaEnvelope />,
-    color: "from-emerald-500 to-teal-400",
-    bgPattern: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
-    span: "md:col-span-1",
-  },
-  {
     title: "Web Hosting",
-    desc: "Experience 99.99% uptime with military-grade SSL security and lightning-fast server response times.",
+    desc: "Secure, high-availability hosting with 99.9% uptime, performance monitoring, and zero downtime worries.",
     icon: <FaServer />,
     color: "from-indigo-600 to-blue-500",
     bgPattern: "linear-gradient(30deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
     span: "md:col-span-1",
   },
   {
+    title: "Branding & Identity",
+    desc: "Distinct brand identities that build trust, recognition, and a strong digital presence from day one.",
+    icon: <FaLayerGroup />,
+    color: "from-purple-600 to-pink-500",
+    bgPattern: "linear-gradient(45deg, rgba(255,255,255,0.05) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.05) 75%, transparent 75%, transparent)",
+    span: "md:col-span-1", 
+  },
+  {
+    title: "Domain & Business Mail",
+    desc: "Professional domains and business email solutions that strengthen credibility and brand communication.",
+    icon: <FaEnvelope />,
+    color: "from-emerald-500 to-teal-400",
+    bgPattern: "radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px)",
+    span: "md:col-span-1",
+  },
+  {
     title: "Digital Marketing",
-    desc: "Stop guessing, start dominating. We deploy data-weaponized SEO and PPC strategies that turn traffic into revenue streams.",
+    desc: "Data-driven SEO, paid ads, and growth strategies designed to attract qualified traffic, increase conversions, and scale revenue. We combine analytics, performance marketing, and continuous optimization to turn visibility into measurable business growth.",
     icon: <FaBullhorn />,
     color: "from-orange-500 to-yellow-400",
     bgPattern: "linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px)",
@@ -58,7 +59,7 @@ const services = [
   },
   {
     title: "Cloud & DevOps",
-    desc: "Scalable AWS & Google Cloud infrastructure. CI/CD pipelines for unbreakable reliability.",
+    desc: "Scalable cloud infrastructure and CI/CD automation for secure, reliable, and future-ready systems.",
     icon: <FaCloud />,
     color: "from-cyan-500 to-blue-500",
     bgPattern: "radial-gradient(circle, rgba(255,255,255,0.1) 2px, transparent 2px)",
@@ -137,15 +138,15 @@ const CreativeCard = ({ title, desc, icon, span, color, bgPattern, index }: any)
           </p>
         </div>
 
-        {/* Bigger Button */}
-        <div className="flex items-center gap-4 mt-8">
+        {/* Bigger Button - REPLACED DIV WITH LINK */}
+        <Link href="/services" className="flex items-center gap-4 mt-8 w-fit">
           <div className={`w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-300`}>
             <FaArrowRight className="-rotate-45 group-hover:rotate-0 transition-transform duration-300 text-lg" />
           </div>
           <span className="text-sm font-bold uppercase tracking-widest text-white/50 group-hover:text-white transition-colors">
             View Service
           </span>
-        </div>
+        </Link>
       </motion.div>
 
       <div className={`absolute inset-0 border-2 border-transparent group-hover:border-white/10 rounded-[2.5rem] transition-colors duration-500 pointer-events-none`} />
