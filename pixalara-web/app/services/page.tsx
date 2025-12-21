@@ -5,11 +5,11 @@ import {
   FaPaintBrush, FaLayerGroup, FaMobileAlt, FaEnvelope, 
   FaServer, FaBullhorn, FaCloud, FaArrowRight,
   FaHtml5, FaReact, FaNodeJs, FaPython, FaAws, FaGoogle, FaMicrosoft, 
-  FaWordpress, FaGoogleDrive
+  FaWordpress, FaGoogleDrive, FaLaravel, FaJava, FaGithub, FaPhp, FaChartLine
 } from 'react-icons/fa';
-import { SiCloudflare, SiZoho } from 'react-icons/si';
+import { SiCloudflare, SiZoho, SiFramer, SiKubernetes } from 'react-icons/si';
 
-// === SERVICE DATA (REORDERED) ===
+// === SERVICE DATA ===
 const services = [
   {
     id: "01",
@@ -70,28 +70,38 @@ const services = [
 ];
 
 // === TECH STACK DATA ===
-const techStack = [
+const techRow1 = [
   { name: "Next.js", icon: <FaReact />, color: "text-white" },
   { name: "React", icon: <FaReact />, color: "text-cyan-400" },
   { name: "NodeJS", icon: <FaNodeJs />, color: "text-green-500" },
-  { name: "TypeScript", icon: <FaHtml5 />, color: "text-blue-400" }, 
+  { name: "TypeScript", icon: <FaHtml5 />, color: "text-blue-400" },
   { name: "AWS", icon: <FaAws />, color: "text-orange-400" },
-  { name: "Docker", icon: <FaServer />, color: "text-blue-500" }, 
+  { name: "Framer", icon: <SiFramer />, color: "text-white" },
+  { name: "Laravel", icon: <FaLaravel />, color: "text-red-600" },
+  { name: "Docker", icon: <FaServer />, color: "text-blue-500" },
+  { name: "Github", icon: <FaGithub />, color: "text-white" },
+  { name: "PHP", icon: <FaPhp />, color: "text-indigo-400" },
+];
+
+const techRow2 = [
   { name: "Python", icon: <FaPython />, color: "text-yellow-400" },
   { name: "Google Cloud", icon: <FaGoogle />, color: "text-blue-500" },
+  { name: "Kubernetes", icon: <SiKubernetes />, color: "text-blue-600" },
+  { name: "Java", icon: <FaJava />, color: "text-red-500" },
   { name: "Cloudflare", icon: <SiCloudflare />, color: "text-orange-500" },
   { name: "Zoho", icon: <SiZoho />, color: "text-yellow-500" },
   { name: "MS Workspace", icon: <FaMicrosoft />, color: "text-blue-600" },
   { name: "G-Workspace", icon: <FaGoogleDrive />, color: "text-green-500" },
+  { name: "Site24x7", icon: <FaChartLine />, color: "text-green-500" },
 ];
 
 export default function ServicesPage() {
   return (
-    // REDUCED: pt-40 -> pt-32
-    <main className="min-h-screen pt-32 pb-20 overflow-hidden">
+    // UPDATED: Changed pb-20 to pb-0 to allow seamless blend
+    <main className="min-h-screen pt-24 pb-0 overflow-hidden">
       
-      {/* 1. HERO SECTION - REDUCED MARGIN (mb-12) */}
-      <section className="relative px-6 text-center mb-12">
+      {/* 1. HERO SECTION */}
+      <section className="relative px-6 text-center mb-16">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-blue-600/10 rounded-full blur-[120px] pointer-events-none" />
         
         <motion.div
@@ -104,7 +114,6 @@ export default function ServicesPage() {
           </p>
           <h1 className="relative z-10 text-5xl md:text-8xl font-bold text-white mb-6 tracking-tighter">
             Digital Experiences.<br />
-            {/* UPDATED: Gradient matches Logo (Cyan -> Purple -> Pink) */}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
               Engineered to Scale.
             </span>
@@ -122,13 +131,13 @@ export default function ServicesPage() {
         </motion.p>
       </section>
 
-      {/* 2. THE 7 SERVICE SECTIONS - REDUCED GAP (gap-16) */}
-      <div className="flex flex-col gap-16">
+      {/* 2. THE 7 SERVICE SECTIONS */}
+      <div className="flex flex-col gap-12">
         {services.map((service, index) => (
           <section key={service.id} className="relative px-6 group">
             <div className={`absolute top-1/2 ${index % 2 === 0 ? 'right-0' : 'left-0'} -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r ${service.color} opacity-[0.08] blur-[120px] pointer-events-none`} />
             <div className="max-w-7xl mx-auto w-full">
-              <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-16 md:gap-24`}>
+              <div className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} items-center gap-12 md:gap-24`}>
                 
                 {/* Text Side */}
                 <div className="flex-1 relative z-10">
@@ -155,7 +164,7 @@ export default function ServicesPage() {
                         </div>
                       ))}
                     </div>
-                    {/* BUTTON UPDATED TO LINK */}
+                    {/* Link */}
                     <Link 
                       href="/contact"
                       className="px-8 py-3 rounded-full border border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-cyan-500/50 transition-all inline-flex items-center gap-3 font-bold text-sm uppercase tracking-widest backdrop-blur-md"
@@ -193,23 +202,25 @@ export default function ServicesPage() {
         ))}
       </div>
 
-      {/* 3. TECHNOLOGY STACK */}
-      <section className="mt-40 pt-24 border-t border-white/5 relative overflow-hidden">
-        <div className="text-center mb-16 relative z-10 px-6">
+      {/* 3. TECHNOLOGY STACK (Dual Scroll) */}
+      <section className="mt-20 pt-12 border-t border-white/5 relative overflow-hidden">
+        <div className="text-center mb-12 relative z-10 px-6">
            <p className="text-cyan-400 font-bold uppercase tracking-widest text-xs mb-4">Our Arsenal</p>
            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
              Technology <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">Stack</span>
            </h2>
            <p className="text-gray-400">Powering your digital empire with the world's most advanced frameworks.</p>
         </div>
-        <div className="flex overflow-hidden mb-8">
+        
+        {/* Row 1: Left Scroll */}
+        <div className="flex overflow-hidden mb-6">
           <motion.div 
             initial={{ x: 0 }}
             animate={{ x: "-50%" }}
-            transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
             className="flex gap-4 md:gap-8 px-4"
           >
-            {[...techStack, ...techStack].map((tech, index) => (
+            {[...techRow1, ...techRow1].map((tech, index) => (
               <div key={index} className="flex-shrink-0 flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-purple-500/30 transition-all cursor-default group">
                 <span className={`text-3xl md:text-4xl ${tech.color} group-hover:scale-110 transition-transform`}>{tech.icon}</span>
                 <span className="text-gray-300 font-bold tracking-wide text-sm md:text-base group-hover:text-white">{tech.name}</span>
@@ -217,7 +228,35 @@ export default function ServicesPage() {
             ))}
           </motion.div>
         </div>
+
+        {/* Row 2: Right Scroll */}
+        <div className="flex overflow-hidden mb-8">
+          <motion.div 
+            initial={{ x: "-50%" }}
+            animate={{ x: "0%" }}
+            transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
+            className="flex gap-4 md:gap-8 px-4"
+          >
+            {[...techRow2, ...techRow2].map((tech, index) => (
+              <div key={index} className="flex-shrink-0 flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm hover:bg-white/10 hover:border-blue-500/30 transition-all cursor-default group">
+                <span className={`text-3xl md:text-4xl ${tech.color} group-hover:scale-110 transition-transform`}>{tech.icon}</span>
+                <span className="text-gray-300 font-bold tracking-wide text-sm md:text-base group-hover:text-white">{tech.name}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </section>
+
+      {/* === PREMIUM BLENDING EFFECT === */}
+      {/* Glows and gradients to bridge into the footer */}
+      <div className="relative w-full h-40 mt-0">
+        
+        {/* 1. Atmospheric Glow connecting to the Footer's 'Ready to Scale' section */}
+        <div className="absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-full max-w-4xl h-[400px] bg-purple-900/20 blur-[120px] pointer-events-none z-0" />
+        
+        {/* 2. Soft Gradient Fade at the very bottom to blend into black */}
+        <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none z-10" />
+      </div>
 
     </main>
   );
