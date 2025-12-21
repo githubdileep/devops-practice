@@ -88,10 +88,11 @@ export default function Footer() {
           </p>
 
           <Link href="/contact">
+            {/* UPDATED: Premium Glassmorphism Button Style */}
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white text-black rounded-full font-bold text-lg tracking-wide hover:bg-gray-200 transition-all"
+              className="group relative inline-flex items-center gap-3 px-10 py-5 bg-white/5 border border-white/20 backdrop-blur-md text-white rounded-full font-bold text-lg tracking-wide hover:bg-white hover:text-black transition-all shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]"
             >
               <span>Get a Quote</span>
               <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
