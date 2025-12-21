@@ -61,7 +61,8 @@ export default function Process() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "90%"]);
 
   return (
-    <section ref={containerRef} className="bg-transparent pt-0 pb-40 px-6 relative overflow-hidden">
+    // UPDATED: Reduced pb-40 to pb-12 to remove the large gap
+    <section ref={containerRef} className="bg-transparent pt-0 pb-12 px-6 relative overflow-hidden">
       
       {/* Header */}
       <div className="text-center mb-40 relative z-10">
@@ -77,10 +78,9 @@ export default function Process() {
         </p>
       </div>
 
-      <div className="max-w-[1200px] mx-auto relative">
+      <div className="max-w-[1200px] mx-auto relative z-10">
         
         {/* === Background Line Track === */}
-        {/* Aligned to left-[36px] */}
         <div className="absolute top-0 left-[36px] md:left-1/2 -translate-x-1/2 w-[2px] h-[95%] bg-gradient-to-b from-white/10 to-transparent" />
         
         {/* === THE GLOWING LASER LINE === */}
@@ -115,7 +115,7 @@ export default function Process() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ margin: "-20% 0px -20% 0px" }}
                 transition={{ duration: 0.6 }}
-                // UPDATED: Reduced margin to ml-20 (was ml-24) to give more width to content
+                // Kept mobile optimizations (ml-20, min-w-0)
                 className="ml-20 md:ml-0 flex-1 md:flex-none min-w-0 md:w-5/12 p-8 md:p-10 rounded-[2rem] bg-white/5 border border-white/10 hover:border-red-600/50 hover:bg-white/10 transition-colors group"
               >
                 {/* Icon */}
@@ -123,7 +123,7 @@ export default function Process() {
                   {step.icon}
                 </div>
                 
-                {/* Title: Reduced to text-2xl on mobile to fit long words like 'Optimization' */}
+                {/* Title */}
                 <h3 className="text-2xl md:text-4xl font-bold text-white mb-4 tracking-tight break-words">
                   {step.title}
                 </h3>
@@ -138,6 +138,14 @@ export default function Process() {
           ))}
         </div>
       </div>
+
+      {/* === PREMIUM BLENDING EFFECT (NEW) === */}
+      {/* 1. Atmospheric Glow connecting to the next section */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-purple-900/20 blur-[100px] pointer-events-none z-0" />
+      
+      {/* 2. Soft Gradient Fade at the very bottom to blend into black */}
+      <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
+
     </section>
   );
 }

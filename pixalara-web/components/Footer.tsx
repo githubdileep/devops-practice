@@ -11,11 +11,23 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  // Social Media Data
+  // Social Media Data (UPDATED WITH HOVER COLORS)
   const socialLinks = [
-    { Icon: FaLinkedin, href: "https://www.linkedin.com/company/pixalara/" },
-    { Icon: FaInstagram, href: "https://www.instagram.com/pixalara/" },
-    { Icon: FaXTwitter, href: "https://x.com/pixalara" }
+    { 
+      Icon: FaLinkedin, 
+      href: "https://www.linkedin.com/company/pixalara/",
+      hoverClass: "hover:bg-[#0077b5] hover:border-[#0077b5]" // LinkedIn Blue
+    },
+    { 
+      Icon: FaInstagram, 
+      href: "https://www.instagram.com/pixalara/",
+      hoverClass: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent" // Instagram Gradient
+    },
+    { 
+      Icon: FaXTwitter, 
+      href: "https://x.com/pixalara",
+      hoverClass: "hover:bg-white hover:text-black hover:border-white" // X White/Black
+    }
   ];
 
   // Handle Newsletter Submission
@@ -102,15 +114,16 @@ export default function Footer() {
             Pixalara is a digital-first technology studio crafting high-performance websites, scalable applications, and cloud-ready solutions for growing brands.
           </p>
           
-          {/* Social Icons */}
+          {/* Social Icons (UPDATED MAP) */}
           <div className="flex gap-4">
-            {socialLinks.map(({ Icon, href }, i) => (
+            {socialLinks.map(({ Icon, href, hoverClass }, i) => (
               <a 
                 key={i} 
                 href={href} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-purple-600 transition-colors"
+                // UPDATED: Added border, hover scaling, and dynamic hoverClass
+                className={`w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 ${hoverClass}`}
               >
                 <Icon size={18} />
               </a>
@@ -118,7 +131,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Column 2: Quick Links (UPDATED) */}
+        {/* Column 2: Quick Links */}
         <div>
           <h4 className="text-white font-bold mb-6">Company</h4>
           <ul className="space-y-4 text-sm text-gray-500">
