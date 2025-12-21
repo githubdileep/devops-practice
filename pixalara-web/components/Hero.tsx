@@ -17,20 +17,34 @@ const rollingTexts = [
 
 export default function Hero() {
   const [hasEntered, setHasEntered] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // New loading state to prevent flash
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [textIndex, setTextIndex] = useState(0);
 
-  // 1. Lock scrolling when the site loads
+  // 1. CHECK SESSION STORAGE ON MOUNT
   useEffect(() => {
-    if (!hasEntered) {
-      document.body.style.overflow = 'hidden'; // Freeze scrolling
-    } else {
-      document.body.style.overflow = 'unset'; // Enable scrolling after entry
+    // Check if user has already entered in this session
+    const visited = sessionStorage.getItem('hasEnteredSite');
+    
+    if (visited) {
+      setHasEntered(true);
     }
-  }, [hasEntered]);
+    
+    // Slight delay to ensure hydration is complete before showing overlay
+    setIsLoading(false);
+  }, []);
 
-  // 2. Auto-rotate text every 3 seconds
+  // 2. Lock scrolling only if NOT entered and NOT loading
+  useEffect(() => {
+    if (!hasEntered && !isLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [hasEntered, isLoading]);
+
+  // 3. Auto-rotate text
   useEffect(() => {
     const interval = setInterval(() => {
       setTextIndex((prev) => (prev + 1) % rollingTexts.length);
@@ -40,6 +54,9 @@ export default function Hero() {
 
   const handleEnter = () => {
     setHasEntered(true);
+    // SAVE TO STORAGE
+    sessionStorage.setItem('hasEnteredSite', 'true');
+    
     if (videoRef.current) {
       videoRef.current.muted = false;
       videoRef.current.play().catch(error => {
@@ -55,10 +72,13 @@ export default function Hero() {
     }
   };
 
+  // Don't render anything until we've checked storage to prevent flashing
+  if (isLoading) return null;
+
   return (
     <section className="relative w-full h-screen overflow-hidden bg-transparent flex items-center justify-center">
       
-      {/* === 1. PREMIUM ENTRY OVERLAY (IMPROVED) === */}
+      {/* === 1. PREMIUM ENTRY OVERLAY === */}
       <AnimatePresence>
         {!hasEntered && (
           <motion.div 
@@ -81,14 +101,12 @@ export default function Hero() {
               transition={{ duration: 1.2, ease: "easeOut" }}
               className="text-center relative z-10 px-6"
             >
-              {/* Massive Brand Name */}
               <h1 className="text-6xl md:text-9xl font-black mb-6 tracking-tighter">
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">
                   PIXALARA
                 </span>
               </h1>
 
-              {/* New Creative Tagline */}
               <div className="space-y-2 mb-16">
                 <motion.p 
                   initial={{ opacity: 0, y: 20 }}
@@ -108,7 +126,6 @@ export default function Hero() {
                 </motion.p>
               </div>
               
-              {/* Refined Enter Button */}
               <motion.button 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -130,10 +147,12 @@ export default function Hero() {
       
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60 z-10" />
+        {/* Only play/load video if entered to save resources, or keep muted background */}
         <video 
           ref={videoRef}
           loop 
-          muted={false} 
+          muted={!hasEntered || isMuted} 
+          autoPlay={hasEntered} // AutoPlay only if entered
           playsInline 
           className="w-full h-full object-cover opacity-60"
         >
