@@ -31,7 +31,24 @@ export default function Hero() {
     setIsLoading(false);
   }, []);
 
-  // 2. Lock scrolling only if NOT entered and NOT loading
+  // 2. FORCE VOLUME & PLAY ON ENTRY (THE FIX)
+  // We use useEffect here to ensure this runs AFTER the state update
+  useEffect(() => {
+    if (hasEntered && videoRef.current) {
+      const video = videoRef.current;
+      
+      // Force volume to 50%
+      video.volume = 0.5; 
+      
+      // Unmute and Play
+      video.muted = false;
+      video.play().catch(error => {
+        console.log("Autoplay prevented:", error);
+      });
+    }
+  }, [hasEntered]);
+
+  // 3. Lock scrolling only if NOT entered and NOT loading
   useEffect(() => {
     if (!hasEntered && !isLoading) {
       document.body.style.overflow = 'hidden';
@@ -40,7 +57,7 @@ export default function Hero() {
     }
   }, [hasEntered, isLoading]);
 
-  // 3. Auto-rotate text
+  // 4. Auto-rotate text
   useEffect(() => {
     const interval = setInterval(() => {
       setTextIndex((prev) => (prev + 1) % rollingTexts.length);
@@ -50,16 +67,8 @@ export default function Hero() {
 
   const handleEnter = () => {
     setHasEntered(true);
-    // SAVE TO STORAGE
     sessionStorage.setItem('hasEnteredSite', 'true');
-    
-    if (videoRef.current) {
-      videoRef.current.muted = false; // Unmute
-      videoRef.current.volume = 0.5;  // <--- SET VOLUME TO 50% HERE
-      videoRef.current.play().catch(error => {
-        console.log("Autoplay prevented:", error);
-      });
-    }
+    // The useEffect above ^^^ will handle the playing and volume now.
   };
 
   const toggleAudio = () => {
@@ -146,8 +155,8 @@ export default function Hero() {
         <video 
           ref={videoRef}
           loop 
+          // Control muted state via React State, but initally handle playback via useEffect
           muted={!hasEntered || isMuted} 
-          autoPlay={hasEntered} 
           playsInline 
           className="w-full h-full object-cover opacity-60"
         >
