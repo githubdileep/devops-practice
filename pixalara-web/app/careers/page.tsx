@@ -32,7 +32,6 @@ const jobs = [
     dept: "Engineering",
     type: "Full-Time",
     location: "Remote",
-    // UPDATED DESCRIPTION: Added advanced tech stack requirements
     description: "We need an infrastructure wizard with advanced expertise in GitHub Actions, Docker, K8s, Grafana, and Prometheus. You will architect and manage our cloud infrastructure using the full AWS suite and Google Cloud GKE."
   },
   {
@@ -274,7 +273,8 @@ export default function CareersPage() {
                   {perk.icon}
                 </div>
                 <h3 className="text-xl font-bold text-white mb-3">{perk.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{perk.desc}</p>
+                {/* UPDATED: Increased font size to text-base md:text-lg and changed color to text-gray-300 for better contrast */}
+                <p className="text-gray-300 text-base md:text-lg leading-relaxed">{perk.desc}</p>
               </div>
             </motion.div>
           ))}
