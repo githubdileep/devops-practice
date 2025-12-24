@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar"; 
-import Footer from "@/components/Footer"; // <--- IMPORT FOOTER
+import Footer from "@/components/Footer"; 
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +21,13 @@ export const metadata: Metadata = {
     locale: "en_US",
     type: "website",
   },
+  // === GOOGLE SEO ICON FIX ===
+  icons: {
+    icon: '/icon.jpg',      // Requires icon.jpg to be in the 'public' folder
+    shortcut: '/icon.jpg',
+    apple: '/icon.jpg',
+  },
+  // ===========================
 };
 
 export default function RootLayout({
@@ -33,7 +40,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar />
         {children}
-        <Footer /> {/* <--- THIS ADDS THE BOTTOM SECTION BACK */}
+        <Footer />
       </body>
     </html>
   );
