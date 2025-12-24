@@ -16,8 +16,8 @@ const rollingTexts = [
 ];
 
 export default function Hero() {
+  // Default to FALSE so the overlay is visible by default (preventing flash)
   const [hasEntered, setHasEntered] = useState(false);
-  const [isLoading, setIsLoading] = useState(true); 
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [textIndex, setTextIndex] = useState(0);
@@ -28,30 +28,26 @@ export default function Hero() {
     if (visited) {
       setHasEntered(true);
     }
-    setIsLoading(false);
   }, []);
 
-  // 2. HANDLE "REVISIT" AUTOPLAY (Session Storage Case)
+  // 2. FORCE VOLUME & PLAY ON ENTRY
   useEffect(() => {
     if (hasEntered && videoRef.current) {
       const video = videoRef.current;
-      // Ensure volume is set for revisiting users too
-      video.volume = 0.5;
       video.muted = false;
-      video.play().catch(() => {
-        // Silent catch for autoplay restrictions on reload
-      });
+      video.volume = 0.5; // Force 50% volume
+      video.play().catch(() => {}); 
     }
   }, [hasEntered]);
 
   // 3. Lock scrolling
   useEffect(() => {
-    if (!hasEntered && !isLoading) {
+    if (!hasEntered) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [hasEntered, isLoading]);
+  }, [hasEntered]);
 
   // 4. Auto-rotate text
   useEffect(() => {
@@ -61,18 +57,19 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // === THE FIX: IMMEDIATE PLAY & VOLUME ===
+  // === INSTANT PLAY + FORCE VOLUME ===
   const handleEnter = () => {
-    // 1. Trigger Video IMMEDIATELY (No Delay)
     if (videoRef.current) {
-      videoRef.current.muted = false; // Unmute
-      videoRef.current.volume = 0.5;  // Set 50% Volume
-      videoRef.current.play().catch(error => {
-        console.log("Play prevented:", error);
-      });
+      videoRef.current.muted = false;
+      videoRef.current.volume = 0.5;
+      videoRef.current.play().catch((e) => console.log("Play error:", e));
+
+      // Force volume again slightly later to override browser defaults
+      setTimeout(() => {
+        if (videoRef.current) videoRef.current.volume = 0.5;
+      }, 50);
     }
 
-    // 2. Update State
     setHasEntered(true);
     sessionStorage.setItem('hasEnteredSite', 'true');
   };
@@ -84,15 +81,15 @@ export default function Hero() {
     }
   };
 
-  if (isLoading) return null;
-
   return (
     <section className="relative w-full h-screen overflow-hidden bg-transparent flex items-center justify-center">
       
       {/* === 1. PREMIUM ENTRY OVERLAY === */}
+      {/* Removed the 'isLoading' check so this renders immediately */}
       <AnimatePresence>
         {!hasEntered && (
           <motion.div 
+            // Start visible to cover underlying content immediately
             initial={{ opacity: 1 }}
             exit={{ opacity: 0, scale: 1.1, filter: "blur(20px)" }}
             transition={{ duration: 1, ease: "easeInOut" }}
@@ -160,12 +157,10 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60 z-10" />
         <video 
           ref={videoRef}
+          preload="auto"
           loop 
+          muted={!hasEntered || isMuted} 
           playsInline 
-          // UPDATED: We removed 'autoPlay' prop to avoid conflicts.
-          // UPDATED: 'muted' is strictly controlled by our mute button state, 
-          // but we manually set it to false in handleEnter.
-          muted={!hasEntered || isMuted}
           className="w-full h-full object-cover opacity-60"
         >
           <source src="/videos/hero-video.mp4" type="video/mp4" />

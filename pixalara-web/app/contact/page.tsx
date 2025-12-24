@@ -182,7 +182,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">HQ</p>
-                  <p className="text-xl text-white font-medium">Global / Remote First</p>
+                  <p className="text-xl text-white font-medium">Chicago, Illinois, USA</p>
                 </div>
               </div>
             </div>
@@ -190,7 +190,7 @@ export default function ContactPage() {
 
           {/* === CONVERSION BOOSTER SECTION === */}
           <div className="border-t border-white/10 pt-10 mt-auto">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Why Global Brands Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">Pixalara</span>?
             </h3>
             <div className="space-y-6">
@@ -254,19 +254,16 @@ export default function ContactPage() {
                     animate={{ scale: 1, opacity: 1, y: 0 }}
                     exit={{ scale: 0.8, opacity: 0, y: 20 }}
                     transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    // Fixed width to 320px for a compact "Card" look
                     className="relative w-[320px] p-6 rounded-[2rem] bg-[#0f0f0f] border border-white/10 shadow-2xl text-center overflow-hidden"
                   >
                     {/* Creative Top Gradient Bar */}
                     <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500" />
 
                     <div className="relative z-10 flex flex-col items-center mt-2">
-                      {/* Glowing Checkmark */}
                       <div className="w-14 h-14 bg-green-500/10 rounded-full flex items-center justify-center mb-4 ring-1 ring-green-500/50 shadow-[0_0_20px_rgba(34,197,94,0.2)]">
                         <FaCheckCircle className="text-2xl text-green-400" />
                       </div>
                       
-                      {/* UPDATED: Changed from "Message Sent!" to "Thank You" */}
                       <h3 className="text-2xl font-bold text-white mb-2">Thank You</h3>
                       <p className="text-gray-400 text-sm mb-8 leading-relaxed">
                         We've received your inquiry. Our team is already reviewing it and will get back to you shortly.
@@ -302,19 +299,19 @@ export default function ContactPage() {
               
               {/* Row 1: Name & Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Name</label>
+                <motion.div variants={itemVariants} className="space-y-3">
+                  <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Name</label>
                   <input required name="name" value={formData.name} onChange={handleChange} type="text" placeholder="John Doe" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all" />
                 </motion.div>
-                <motion.div variants={itemVariants} className="space-y-2">
-                  <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Email</label>
+                <motion.div variants={itemVariants} className="space-y-3">
+                  <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Email</label>
                   <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="john@company.com" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all" />
                 </motion.div>
               </div>
 
               {/* Row 2: Mobile */}
-              <motion.div variants={itemVariants} className="space-y-2">
-                <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Mobile Number</label>
+              <motion.div variants={itemVariants} className="space-y-3">
+                <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Mobile Number</label>
                 <div className="flex gap-3 relative">
                   <div className="w-32 shrink-0 relative" ref={dropdownRef}>
                     <button type="button" onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="w-full h-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white flex items-center justify-between hover:border-purple-500 transition-all">
@@ -339,9 +336,9 @@ export default function ContactPage() {
               </motion.div>
 
               {/* Row 3: PROJECT TYPE SELECTION (VERTICAL) */}
-              <motion.div variants={itemVariants} className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Project Type</label>
+              <motion.div variants={itemVariants} className="space-y-4 pt-2">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Project Type</label>
                   <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">(Select at least one)</span>
                 </div>
                 
@@ -377,10 +374,11 @@ export default function ContactPage() {
                 {errorMsg && <p className="text-red-400 text-xs font-bold mt-2 animate-pulse">{errorMsg}</p>}
               </motion.div>
 
-              {/* Row 4: Budget Selection */}
-              <motion.div variants={itemVariants} className="space-y-6 mt-8">
-                <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Project Budget</label>
-                <div className="flex flex-wrap gap-2">
+              {/* Row 4: Budget Selection (FIXED SPACING) */}
+              <motion.div variants={itemVariants} className="mt-8">
+                {/* Added 'block' and 'mb-6' to separate label from buttons */}
+                <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider mb-6">Project Budget</label>
+                <div className="flex flex-wrap gap-3">
                   {budgets.map((b) => (
                     <motion.button 
                       key={b} 
@@ -397,9 +395,9 @@ export default function ContactPage() {
               </motion.div>
 
               {/* Row 5: Details */}
-              <motion.div variants={itemVariants} className="space-y-2">
-                <label className="text-sm text-gray-400 font-bold uppercase tracking-wider">Project Details</label>
-                <textarea required name="message" value={formData.message} onChange={handleChange} rows={4} placeholder="Tell us about your project goals and timeline..." className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all resize-none custom-scrollbar"></textarea>
+              <motion.div variants={itemVariants} className="space-y-3 mt-4">
+                <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Project Details</label>
+                <textarea required name="message" value={formData.message} onChange={handleChange} rows={6} placeholder="Tell us about your project goals and timeline..." className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all resize-none custom-scrollbar"></textarea>
               </motion.div>
 
               <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} />
