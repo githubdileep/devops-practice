@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar"; 
 import Footer from "@/components/Footer"; 
+import SmoothScrolling from "@/components/SmoothScrolling"; // <--- 1. IMPORT ADDED
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
   },
   // === GOOGLE SEO ICON FIX ===
   icons: {
-    icon: '/icon.jpg',      // Requires icon.jpg to be in the 'public' folder
+    icon: '/icon.jpg',      
     shortcut: '/icon.jpg',
     apple: '/icon.jpg',
   },
@@ -38,9 +39,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+        <SmoothScrolling> {/* <--- 2. WRAPPER ADDED */}
+          <Navbar />
+          {children}
+          <Footer />
+        </SmoothScrolling>
       </body>
     </html>
   );
