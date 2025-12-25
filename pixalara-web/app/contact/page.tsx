@@ -8,14 +8,19 @@ import {
   FaHome, FaRocket, FaShieldAlt, FaClock 
 } from 'react-icons/fa';
 
-// === COUNTRY LIST ===
+// === UPDATED COUNTRY LIST WITH DYNAMIC PLACEHOLDERS ===
 const countryCodes = [
-  { code: "+91", country: "IN", flag: "🇮🇳" }, { code: "+1", country: "US", flag: "🇺🇸" },
-  { code: "+44", country: "GB", flag: "🇬🇧" }, { code: "+971", country: "AE", flag: "🇦🇪" },
-  { code: "+61", country: "AU", flag: "🇦🇺" }, { code: "+1", country: "CA", flag: "🇨🇦" },
-  { code: "+49", country: "DE", flag: "🇩🇪" }, { code: "+33", country: "FR", flag: "🇫🇷" },
-  { code: "+81", country: "JP", flag: "🇯🇵" }, { code: "+65", country: "SG", flag: "🇸🇬" },
-  { code: "+", country: "OT", flag: "🌐" },
+  { code: "+1", country: "US", flag: "🇺🇸", placeholder: "(555) 123-4567" },
+  { code: "+91", country: "IN", flag: "🇮🇳", placeholder: "98765 43210" },
+  { code: "+44", country: "GB", flag: "🇬🇧", placeholder: "7911 123456" },
+  { code: "+971", country: "AE", flag: "🇦🇪", placeholder: "50 123 4567" },
+  { code: "+61", country: "AU", flag: "🇦🇺", placeholder: "412 345 678" },
+  { code: "+1", country: "CA", flag: "🇨🇦", placeholder: "(555) 123-4567" },
+  { code: "+49", country: "DE", flag: "🇩🇪", placeholder: "151 12345678" },
+  { code: "+33", country: "FR", flag: "🇫🇷", placeholder: "6 12 34 56 78" },
+  { code: "+81", country: "JP", flag: "🇯🇵", placeholder: "90-1234-5678" },
+  { code: "+65", country: "SG", flag: "🇸🇬", placeholder: "8123 4567" },
+  { code: "+", country: "OT", flag: "🌐", placeholder: "Phone Number" },
 ];
 
 // === PROJECT TYPES ===
@@ -61,7 +66,7 @@ export default function ContactPage() {
   // Multi-Select Project Types
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
 
-  // Dropdown State
+  // Dropdown State - Defaults to US (index 0)
   const [selectedCountry, setSelectedCountry] = useState(countryCodes[0]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -182,7 +187,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-xs text-gray-500 uppercase tracking-wider font-bold mb-1">HQ</p>
-                  <p className="text-xl text-white font-medium">Chicago, Illinois, USA</p>
+                  <p className="text-xl text-white font-medium">Chicago, Illinois, US</p>
                 </div>
               </div>
             </div>
@@ -331,7 +336,16 @@ export default function ContactPage() {
                       </div>
                     )}
                   </div>
-                  <input type="tel" name="mobile" required value={formData.mobile} onChange={handleChange} className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500 outline-none" placeholder="98765 43210" />
+                  {/* UPDATED: Dynamic Placeholder based on selected country */}
+                  <input 
+                    type="tel" 
+                    name="mobile" 
+                    required 
+                    value={formData.mobile} 
+                    onChange={handleChange} 
+                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-purple-500 outline-none" 
+                    placeholder={selectedCountry.placeholder} 
+                  />
                 </div>
               </motion.div>
 
