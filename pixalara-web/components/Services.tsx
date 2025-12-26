@@ -7,7 +7,7 @@ import {
 } from 'react-icons/fa';
 import Link from 'next/link';
 
-// === DATA (UPDATED DESCRIPTIONS) ===
+// === DATA ===
 const services = [
   {
     title: "Web Design & Development",
@@ -157,10 +157,10 @@ const CreativeCard = ({ title, desc, icon, span, color, bgPattern, index }: any)
 // === MAIN SECTION ===
 export default function Services() {
   return (
-    <section className="bg-transparent py-32 px-6 relative">
+    // FIX: Changed 'py-32' to 'pt-10 pb-32' to drastically reduce top gap
+    <section className="bg-transparent pt-10 pb-32 px-6 relative">
       
       {/* === NEW CONNECTOR: Smooth Black-to-Transparent Fade === */}
-      {/* This ensures the video fades into pure black, then fades to the blue theme */}
       <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-black to-transparent z-0 pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto relative z-10">
