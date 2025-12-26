@@ -19,6 +19,7 @@ export default function Hero() {
   const [hasEntered, setHasEntered] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null); // New Audio Reference
   const [textIndex, setTextIndex] = useState(0);
 
   // 1. CHECK SESSION STORAGE ON MOUNT
@@ -29,14 +30,19 @@ export default function Hero() {
     }
   }, []);
 
-  // 2. FORCE VOLUME & PLAY ON ENTRY
+  // 2. FORCE AUDIO PLAY ON ENTRY
   useEffect(() => {
-    if (hasEntered && videoRef.current) {
-      const video = videoRef.current;
-      video.muted = false;
-      // UPDATED: Changed from 0.5 to 0.1 for a calm, ambient feel
-      video.volume = 0.1; 
-      video.play().catch(() => {}); 
+    if (hasEntered) {
+      // Play Video (Muted)
+      if (videoRef.current) {
+        videoRef.current.muted = true; // Always mute the video track
+        videoRef.current.play().catch(() => {});
+      }
+      // Play Separate Audio (Low Volume)
+      if (audioRef.current) {
+        audioRef.current.volume = 0.2; // Set volume to 20% (Very Calm)
+        audioRef.current.play().catch((e) => console.log("Audio play error:", e));
+      }
     }
   }, [hasEntered]);
 
@@ -57,19 +63,18 @@ export default function Hero() {
     return () => clearInterval(interval);
   }, []);
 
-  // === INSTANT PLAY + FORCE VOLUME ===
+  // === ENTER SITE HANDLER ===
   const handleEnter = () => {
+    // 1. Play Video (Visuals only)
     if (videoRef.current) {
-      videoRef.current.muted = false;
-      // UPDATED: Changed from 0.5 to 0.1
-      videoRef.current.volume = 0.1;
-      videoRef.current.play().catch((e) => console.log("Play error:", e));
+      videoRef.current.muted = true; 
+      videoRef.current.play().catch(() => {});
+    }
 
-      // Force volume again slightly later to override browser defaults
-      setTimeout(() => {
-        // UPDATED: Changed from 0.5 to 0.1
-        if (videoRef.current) videoRef.current.volume = 0.1;
-      }, 50);
+    // 2. Play Music (Audio only)
+    if (audioRef.current) {
+      audioRef.current.volume = 0.2; // Start at 20%
+      audioRef.current.play().catch((e) => console.log("Play error:", e));
     }
 
     setHasEntered(true);
@@ -77,11 +82,14 @@ export default function Hero() {
   };
 
   const toggleAudio = () => {
-    if (videoRef.current) {
-      // Toggle between Muted and Low Volume (0.1)
-      videoRef.current.muted = !isMuted;
-      if (!videoRef.current.muted) {
-        videoRef.current.volume = 0.1; // Ensure it goes back to calm volume when unmuted
+    if (audioRef.current) {
+      if (isMuted) {
+        // Unmute
+        audioRef.current.volume = 0.2; // Return to low volume
+        audioRef.current.muted = false;
+      } else {
+        // Mute
+        audioRef.current.muted = true;
       }
       setIsMuted(!isMuted);
     }
@@ -90,6 +98,12 @@ export default function Hero() {
   return (
     <section className="relative w-full h-screen overflow-hidden bg-transparent flex items-center justify-center">
       
+      {/* === NEW: SEPARATE AUDIO PLAYER === */}
+      {/* Ensure you add 'hero-music.mp3' to your public folder */}
+      <audio ref={audioRef} loop preload="auto">
+        <source src="/hero-music.mp3" type="audio/mp3" />
+      </audio>
+
       {/* === 1. PREMIUM ENTRY OVERLAY === */}
       <AnimatePresence>
         {!hasEntered && (
@@ -163,7 +177,7 @@ export default function Hero() {
           ref={videoRef}
           preload="auto"
           loop 
-          muted={!hasEntered || isMuted} 
+          muted // ALWAYS MUTED - We use separate audio now
           playsInline 
           className="w-full h-full object-cover opacity-60"
         >
