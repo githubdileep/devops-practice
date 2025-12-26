@@ -61,7 +61,6 @@ export default function Process() {
   const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "90%"]);
 
   return (
-    // UPDATED: Reduced pb-40 to pb-12 to remove the large gap
     <section ref={containerRef} className="bg-transparent pt-0 pb-12 px-6 relative overflow-hidden">
       
       {/* Header */}
@@ -115,11 +114,28 @@ export default function Process() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ margin: "-20% 0px -20% 0px" }}
                 transition={{ duration: 0.6 }}
-                // Kept mobile optimizations (ml-20, min-w-0)
-                className="ml-20 md:ml-0 flex-1 md:flex-none min-w-0 md:w-5/12 p-8 md:p-10 rounded-[2rem] bg-white/5 border border-white/10 hover:border-red-600/50 hover:bg-white/10 transition-colors group"
+                className={`
+                  ml-20 md:ml-0 flex-1 md:flex-none min-w-0 md:w-5/12 p-8 md:p-10 rounded-[2rem] border transition-all duration-300 group
+                  active:scale-[0.98] 
+                  
+                  /* === MOBILE: ALWAYS GLOWING === */
+                  bg-white/10 border-red-600/50 
+
+                  /* === DESKTOP: DIMMED DEFAULT, GLOW ON HOVER === */
+                  md:bg-white/5 md:border-white/10 
+                  md:hover:border-red-600/50 md:hover:bg-white/10
+                `}
               >
                 {/* Icon */}
-                <div className="text-4xl md:text-5xl mb-6 text-gray-500 group-hover:text-red-500 transition-colors">
+                <div className={`
+                  text-4xl md:text-5xl mb-6 transition-colors
+                  
+                  /* Mobile: Always Red */
+                  text-red-500 
+
+                  /* Desktop: Gray -> Red on Hover */
+                  md:text-gray-500 md:group-hover:text-red-500
+                `}>
                   {step.icon}
                 </div>
                 
@@ -139,11 +155,8 @@ export default function Process() {
         </div>
       </div>
 
-      {/* === PREMIUM BLENDING EFFECT (NEW) === */}
-      {/* 1. Atmospheric Glow connecting to the next section */}
+      {/* === PREMIUM BLENDING EFFECT === */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-64 bg-purple-900/20 blur-[100px] pointer-events-none z-0" />
-      
-      {/* 2. Soft Gradient Fade at the very bottom to blend into black */}
       <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-black to-transparent pointer-events-none z-10" />
 
     </section>
