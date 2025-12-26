@@ -11,22 +11,22 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  // Social Media Data (UPDATED WITH HOVER COLORS)
+  // Social Media Data
   const socialLinks = [
     { 
       Icon: FaLinkedin, 
       href: "https://www.linkedin.com/company/pixalara/",
-      hoverClass: "hover:bg-[#0077b5] hover:border-[#0077b5]" // LinkedIn Blue
+      hoverClass: "hover:bg-[#0077b5] hover:border-[#0077b5]" 
     },
     { 
       Icon: FaInstagram, 
       href: "https://www.instagram.com/pixalara/",
-      hoverClass: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent" // Instagram Gradient
+      hoverClass: "hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:border-transparent" 
     },
     { 
       Icon: FaXTwitter, 
       href: "https://x.com/pixalara",
-      hoverClass: "hover:bg-white hover:text-black hover:border-white" // X White/Black
+      hoverClass: "hover:bg-white hover:text-black hover:border-white" 
     }
   ];
 
@@ -42,7 +42,7 @@ export default function Footer() {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
-          access_key: "fc78a175-8f5d-4b45-94bd-ca3cd956725e", // Using your existing key
+          access_key: "fc78a175-8f5d-4b45-94bd-ca3cd956725e", 
           subject: "New Newsletter Subscriber",
           from_name: "Pixalara Website",
           email: email,
@@ -68,8 +68,8 @@ export default function Footer() {
     <footer className="bg-black relative overflow-hidden border-t border-white/10">
       
       {/* 1. CALL TO ACTION SECTION */}
-      {/* UPDATED: Hide on Contact Page AND Home Page ('/') */}
-      {pathname !== '/contact' && pathname !== '/' && (
+      {/* UPDATED: Hidden on Contact, Home, AND Careers pages */}
+      {pathname !== '/contact' && pathname !== '/' && pathname !== '/careers' && (
         <div className="relative py-32 px-6 text-center z-10">
           
           {/* Background Glow */}
@@ -88,7 +88,6 @@ export default function Footer() {
           </p>
 
           <Link href="/contact">
-            {/* UPDATED: Premium Glassmorphism Button Style */}
             <motion.button 
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -115,7 +114,6 @@ export default function Footer() {
             Pixalara is a digital-first technology studio crafting high-performance websites, scalable applications, and cloud-ready solutions for growing brands.
           </p>
           
-          {/* Social Icons (UPDATED MAP) */}
           <div className="flex gap-4">
             {socialLinks.map(({ Icon, href, hoverClass }, i) => (
               <a 
@@ -123,7 +121,6 @@ export default function Footer() {
                 href={href} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                // UPDATED: Added border, hover scaling, and dynamic hoverClass
                 className={`w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-white transition-all duration-300 hover:scale-110 ${hoverClass}`}
               >
                 <Icon size={18} />
@@ -132,19 +129,14 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Column 2: Quick Links (REORDERED & RENAMED) */}
+        {/* Column 2: Quick Links */}
         <div>
           <h4 className="text-white font-bold mb-6">Company</h4>
           <ul className="space-y-4 text-sm text-gray-500">
-            {/* 1. Our Work */}
             <li><Link href="/work" className="hover:text-cyan-400 transition-colors">Our Work</Link></li>
-            {/* 2. What We Do */}
             <li><Link href="/services" className="hover:text-cyan-400 transition-colors">What We Do</Link></li>
-            {/* 3. Why Pixalara (Renamed from About Us) */}
             <li><Link href="/about" className="hover:text-cyan-400 transition-colors">Why Pixalara</Link></li>
-            {/* 4. Careers */}
             <li><Link href="/careers" className="hover:text-cyan-400 transition-colors">Careers</Link></li>
-            {/* 5. Contact */}
             <li><Link href="/contact" className="hover:text-cyan-400 transition-colors">Contact</Link></li>
           </ul>
         </div>
