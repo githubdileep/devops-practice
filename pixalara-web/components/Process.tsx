@@ -110,12 +110,14 @@ export default function Process() {
 
               {/* CARD CONTENT */}
               <motion.div 
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+                // FIX 1: Reduced animation offset from 50 to 30 to prevent overlapping with the line
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ margin: "-20% 0px -20% 0px" }}
                 transition={{ duration: 0.6 }}
                 className={`
-                  ml-20 md:ml-0 flex-1 md:flex-none min-w-0 md:w-5/12 p-8 md:p-10 rounded-[2rem] border transition-all duration-300 group
+                  /* FIX 2: Increased margin from ml-20 to ml-24 for better mobile spacing */
+                  ml-24 md:ml-0 flex-1 md:flex-none min-w-0 md:w-5/12 p-8 md:p-10 rounded-[2rem] border transition-all duration-300 group
                   active:scale-[0.98] 
                   
                   /* === MOBILE: ALWAYS GLOWING === */
