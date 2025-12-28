@@ -192,7 +192,7 @@ export default function ContactPage() {
           </div>
 
           {/* === CONVERSION BOOSTER SECTION === */}
-          {/* FIX: Changed 'mt-auto' to 'mt-12' to reduce the gap significantly */}
+          {/* Kept 'mt-12' to maintain reduced gap */}
           <div className="border-t border-white/10 pt-10 mt-12">
             <h3 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Why Global Brands Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500">Pixalara</span>?
@@ -305,11 +305,13 @@ export default function ContactPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <motion.div variants={itemVariants} className="space-y-3">
                   <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Name</label>
-                  <input required name="name" value={formData.name} onChange={handleChange} type="text" placeholder="John Doe" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all" />
+                  {/* UPDATED: Changed placeholder to 'Jane Smith' */}
+                  <input required name="name" value={formData.name} onChange={handleChange} type="text" placeholder="Jane Smith" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all" />
                 </motion.div>
                 <motion.div variants={itemVariants} className="space-y-3">
                   <label className="block text-sm text-gray-400 font-bold uppercase tracking-wider">Email</label>
-                  <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="john@company.com" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all" />
+                  {/* UPDATED: Changed placeholder to 'jane@company.com' */}
+                  <input required name="email" value={formData.email} onChange={handleChange} type="email" placeholder="jane@company.com" className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white placeholder-gray-600 focus:outline-none focus:border-purple-500 focus:bg-black/60 transition-all" />
                 </motion.div>
               </div>
 
