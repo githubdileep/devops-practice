@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next"; // <--- 1. IMPORT ADDED
 import "./globals.css";
 import Navbar from "@/components/Navbar"; 
 import Footer from "@/components/Footer"; 
@@ -8,9 +9,7 @@ import SmoothScrolling from "@/components/SmoothScrolling";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  // FIX: This tells Next.js your real domain for SEO images
   metadataBase: new URL("https://pixalara.com"), 
-
   title: {
     default: "Pixalara | Global Digital Experience Agency",
     template: "%s | Pixalara"
@@ -64,6 +63,8 @@ export default function RootLayout({
         <SmoothScrolling>
           <Navbar />
           {children}
+          {/* <--- 2. COMPONENT ADDED HERE (It tracks all pages) */}
+          <SpeedInsights /> 
           <Footer />
         </SmoothScrolling>
       </body>
