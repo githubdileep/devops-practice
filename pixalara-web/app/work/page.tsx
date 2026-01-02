@@ -87,7 +87,7 @@ const ProjectCard = ({ project }: { project: any }) => {
 
   return (
     <motion.div
-      layout // KEY: Enables the smooth shuffle animation
+      layout 
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
@@ -193,34 +193,33 @@ export default function WorkPage() {
           </h1>
         </div>
 
-        {/* === FILTER TABS (FIXED VISUAL GLITCH) === */}
-        <div className="flex flex-wrap gap-4 mb-12">
+        {/* === FILTER TABS (Fixed Mobile Alignment) === */}
+        {/* ADDED: justify-center for symmetry, gap-3 for mobile fit */}
+        <div className="flex flex-wrap justify-center md:justify-start gap-3 md:gap-4 mb-12">
           {filters.map((filter) => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}
               className={`relative px-6 py-2 rounded-full text-sm font-bold tracking-wide transition-all duration-300 border overflow-hidden ${
                 activeFilter === filter 
-                  ? "text-black border-white" // Text becomes black instantly
+                  ? "text-black border-white" 
                   : "text-gray-400 border-white/10 hover:border-white/30 hover:text-white"
               }`}
             >
-              {/* White Background Animation (Sits Behind Text) */}
               {activeFilter === filter && (
                 <motion.div
                   layoutId="activeFilter"
-                  className="absolute inset-0 bg-white rounded-full z-0" // Removed mix-blend-mode
+                  className="absolute inset-0 bg-white rounded-full z-0"
                   transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                 />
               )}
-              {/* Text Label (Sits On Top) */}
               <span className="relative z-10">{filter}</span> 
             </button>
           ))}
         </div>
       </div>
 
-      {/* === PROJECTS GRID (With AnimatePresence) === */}
+      {/* === PROJECTS GRID === */}
       <motion.div 
         layout
         className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-x-16 md:gap-y-20 mb-8 relative z-10 min-h-[50vh]"
